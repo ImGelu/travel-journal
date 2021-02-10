@@ -9,7 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TravelJournal">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".NewTripActivity"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/Theme.TravelJournal.ActionBar" />
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/Theme.TravelJournal.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
