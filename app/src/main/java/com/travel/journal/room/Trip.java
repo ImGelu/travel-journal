@@ -1,6 +1,28 @@
-package com.travel.journal;
+package com.travel.journal.room;
 
-public class Trip {
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
+
+import androidx.room.Entity;
+
+import java.io.Serializable;
+
+@Entity(foreignKeys = @ForeignKey(entity = User.class,
+        parentColumns = "id",
+        childColumns = "user_id",
+        onDelete = ForeignKey.CASCADE))
+public class Trip implements Serializable {
+
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
+    private int id;
+
+    @ColumnInfo(name = "user_id", index = true)
+    private int userId;
     private String name;
     private String destination;
     private int type; // 0 - City Break, 1 - Sea Side, 2 - Mountains
@@ -9,7 +31,8 @@ public class Trip {
     private String endDate;
     private double rating;
 
-    public Trip(String name, String destination, int type, double price, String startDate, String endDate, double rating) {
+    public Trip(int userId, String name, String destination, int type, double price, String startDate, String endDate, double rating) {
+        this.userId = userId;
         this.name = name;
         this.destination = destination;
         this.type = type;
@@ -19,12 +42,20 @@ public class Trip {
         this.rating = rating;
     }
 
-    public String getEndDate() {
-        return endDate;
+    public int getId() {
+        return id;
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -67,6 +98,14 @@ public class Trip {
         this.startDate = startDate;
     }
 
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
     public double getRating() {
         return rating;
     }
@@ -78,11 +117,14 @@ public class Trip {
     @Override
     public String toString() {
         return "Trip{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", user_id=" + userId +
+                ", name='" + name + '\'' +
                 ", destination='" + destination + '\'' +
                 ", type=" + type +
                 ", price=" + price +
                 ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
                 ", rating=" + rating +
                 '}';
     }

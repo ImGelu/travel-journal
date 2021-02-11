@@ -31,4 +31,16 @@
     <string name="add_trip_title">Add a new Trip</string>
     <string name="generic_exception_text">Something wrong happened!</string>
     <string name="error_required">This input is required</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Don\'t have an account? Sign up!</string>
+    <string name="sign_in_register">Already have an account? Sign in!</string>
+    <string name="create_account">Create account</string>
+    <string name="welcome_message">Welcome to TripApp!</string>
+    <string name="register_welcome_message">Let\'s set up an account!</string>
+    <string name="name">Name</string>
+    <string name="password_verification">Password verification</string>
+    <string name="error_wrong_credentials">Wrong email or password! Try again!</string>
+    <string name="error_email_pattern">Please enter a valid email address!</string>
 </resources>

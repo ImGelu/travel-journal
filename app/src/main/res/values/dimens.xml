@@ -13,4 +13,8 @@
     <dimen name="small_padding">8dp</dimen>
     <dimen name="favorite_icon_height">32dp</dimen>
     <dimen name="hr_height">1dp</dimen>
+    <dimen name="icon_margin_top">120dp</dimen>
+    <dimen name="icon_height">120dp</dimen>
+    <dimen name="medium_margin">16dp</dimen>
+    <dimen name="welcome_text_size">24sp</dimen>
 </resources>
