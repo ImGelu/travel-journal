@@ -22,9 +22,10 @@ import com.travel.journal.room.UserDataBase;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText userName, userEmail, userPassword, userPasswordVerification;
-    private TextInputLayout userNameLayout, userEmailLayout, userPasswordLayout, userPasswordVerificationLayout;
+    private TextInputLayout userEmailLayout;
+    private TextInputLayout userPasswordLayout;
+    private TextInputLayout userPasswordVerificationLayout;
 
-    private UserDataBase userDataBase;
     private UserDao userDao;
 
     @Override
@@ -32,7 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        userDataBase = Room.databaseBuilder(this, UserDataBase.class, GlobalData.USERS_DB_NAME).allowMainThreadQueries().build();
+        UserDataBase userDataBase = Room.databaseBuilder(this, UserDataBase.class, GlobalData.USERS_DB_NAME).allowMainThreadQueries().build();
         userDao = userDataBase.getUserDao();
 
         userName = findViewById(R.id.text_field_name_value);
@@ -40,7 +41,6 @@ public class RegisterActivity extends AppCompatActivity {
         userPassword = findViewById(R.id.text_field_password_value);
         userPasswordVerification = findViewById(R.id.text_field_password_verification_value);
 
-        userNameLayout = findViewById(R.id.text_field_name);
         userEmailLayout = findViewById(R.id.text_field_email);
         userPasswordLayout = findViewById(R.id.text_field_password);
         userPasswordVerificationLayout = findViewById(R.id.text_field_password_verification);
@@ -126,10 +126,10 @@ public class RegisterActivity extends AppCompatActivity {
         if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty() && !passwordVerification.isEmpty()) {
             User existingUser = userDao.getUserByEmail(email);
 
-            if(existingUser != null){
-                 Snackbar.make(view, getString(R.string.email_taken), BaseTransientBottomBar.LENGTH_SHORT).show();
+            if (existingUser != null) {
+                Snackbar.make(view, getString(R.string.email_taken), BaseTransientBottomBar.LENGTH_SHORT).show();
             } else {
-                if (!userPasswordVerification.getText().toString().equals(userPassword.getText().toString())){
+                if (!userPasswordVerification.getText().toString().equals(userPassword.getText().toString())) {
                     Snackbar.make(view, R.string.error_form_generic, BaseTransientBottomBar.LENGTH_SHORT);
                 } else {
                     User newUser = new User(name, email, password);

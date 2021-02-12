@@ -17,9 +17,9 @@
             android:icon="@drawable/ic_baseline_mail_outline_24"
             android:title="@string/contact" />
         <item
-            android:onClick="share"
             android:id="@+id/nav_share"
             android:icon="@drawable/ic_outline_share_24"
+            android:onClick="share"
             android:title="@string/share" />
     </group>
 </menu>

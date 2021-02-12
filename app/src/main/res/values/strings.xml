@@ -66,4 +66,12 @@
     <string name="trip_delete_title">Are you sure you want to delete this trip?</string>
     <string name="cancel">Cancel</string>
     <string name="yes_delete">Yes, delete!</string>
+    <string name="app_logo">App Logo</string>
+    <string name="add_trip_button">Add Trip Button</string>
+    <string name="email_icon">Email Icon</string>
+    <string name="twitter_icon">Twitter Icon</string>
+    <string name="linkedin_logo">LinkedIn Logo</string>
+    <string name="github_logo">Github Logo</string>
+    <string name="travel_background">Travel Background</string>
+    <string name="favorite_button">Favorite Button</string>
 </resources>

@@ -2,7 +2,6 @@ package com.travel.journal.room;
 
 import java.io.Serializable;
 
-import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 

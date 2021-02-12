@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
@@ -12,6 +11,7 @@
         android:layout_height="@dimen/icon_height"
         android:layout_above="@id/linear_layout_contact"
         android:layout_centerInParent="true"
+        android:contentDescription="@string/app_logo"
         android:src="@drawable/icon" />
 
     <LinearLayout
@@ -60,9 +60,10 @@
             <ImageButton
                 android:layout_width="@dimen/contact_icon_size"
                 android:layout_height="@dimen/contact_icon_size"
-                android:layout_marginRight="@dimen/medium_margin"
+                android:layout_marginEnd="@dimen/medium_margin"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
+                android:contentDescription="@string/email_icon"
                 android:focusable="true"
                 android:onClick="openEmailLink"
                 android:scaleType="fitCenter"
@@ -71,9 +72,10 @@
             <ImageButton
                 android:layout_width="@dimen/contact_icon_size"
                 android:layout_height="@dimen/contact_icon_size"
-                android:layout_marginRight="@dimen/medium_margin"
+                android:layout_marginEnd="@dimen/medium_margin"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
+                android:contentDescription="@string/twitter_icon"
                 android:focusable="true"
                 android:onClick="openTwitterLink"
                 android:scaleType="fitCenter"
@@ -82,9 +84,10 @@
             <ImageButton
                 android:layout_width="@dimen/contact_icon_size"
                 android:layout_height="@dimen/contact_icon_size"
-                android:layout_marginRight="@dimen/medium_margin"
+                android:layout_marginEnd="@dimen/medium_margin"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
+                android:contentDescription="@string/linkedin_logo"
                 android:focusable="true"
                 android:onClick="openLinkedInLink"
                 android:scaleType="fitCenter"
@@ -95,6 +98,7 @@
                 android:layout_height="@dimen/contact_icon_size"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
+                android:contentDescription="@string/github_logo"
                 android:focusable="true"
                 android:onClick="openGithubLink"
                 android:scaleType="fitCenter"

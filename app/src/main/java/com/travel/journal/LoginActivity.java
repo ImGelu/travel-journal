@@ -22,13 +22,14 @@ public class LoginActivity extends AppCompatActivity {
     private EditText userEmail, userPassword;
     private TextInputLayout userEmailLayout, userPasswordLayout;
 
-    private UserDataBase userDataBase;
     private UserDao userDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        UserDataBase userDataBase;
 
         userDataBase = Room.databaseBuilder(this, UserDataBase.class, GlobalData.USERS_DB_NAME).allowMainThreadQueries().build();
         userDao = userDataBase.getUserDao();
@@ -49,7 +50,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (!userEmail.getText().toString().isEmpty()) userEmailLayout.setError(null);
                 else userEmailLayout.setError(getString(R.string.error_required));
 
-                if (!TextUtils.isEmpty(s) && !Patterns.EMAIL_ADDRESS.matcher(s).matches()) userEmailLayout.setError(getString(R.string.error_email_pattern));
+                if (!TextUtils.isEmpty(s) && !Patterns.EMAIL_ADDRESS.matcher(s).matches())
+                    userEmailLayout.setError(getString(R.string.error_email_pattern));
             }
 
             @Override

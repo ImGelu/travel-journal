@@ -12,7 +12,7 @@ import com.travel.journal.room.Trip;
 import java.util.List;
 
 public class TripAdapter extends RecyclerView.Adapter<TripViewHolder> {
-    private List<Trip> trips;
+    private final List<Trip> trips;
 
     public TripAdapter(List<Trip> trips) {
         this.trips = trips;
@@ -30,7 +30,7 @@ public class TripAdapter extends RecyclerView.Adapter<TripViewHolder> {
         Trip currentTrip = trips.get(position);
         holder.setTripId(currentTrip.getId());
 
-        if(currentTrip.isFavorite()) {
+        if (currentTrip.isFavorite()) {
             holder.getButtonFavorite().setImageResource(R.drawable.ic_baseline_star_24);
         }
 

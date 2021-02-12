@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/travel_bg"
     android:gravity="bottom"
     android:orientation="vertical"
@@ -32,15 +32,15 @@
             android:id="@+id/nav_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="@string/nav_header_title"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            tools:text="@string/nav_header_title" />
 
         <TextView
             android:id="@+id/nav_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="@string/nav_header_subtitle"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            tools:text="@string/nav_header_subtitle" />
     </LinearLayout>
 </LinearLayout>

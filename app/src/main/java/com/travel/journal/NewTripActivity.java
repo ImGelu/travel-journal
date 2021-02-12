@@ -17,19 +17,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.google.android.material.slider.Slider;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.travel.journal.room.Trip;
 import com.travel.journal.room.TripDao;
 import com.travel.journal.room.TripDataBase;
-import com.travel.journal.ui.home.HomeFragment;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,6 +33,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class NewTripActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -50,9 +47,7 @@ public class NewTripActivity extends AppCompatActivity implements AdapterView.On
     private DatePickerDialog tripDatePicker;
 
     private List<String> tripTypes;
-    private ArrayAdapter<String> spinnerAdapter;
 
-    private TripDataBase tripDataBase;
     private TripDao tripDao;
 
     private Trip editableTrip;
@@ -65,18 +60,18 @@ public class NewTripActivity extends AppCompatActivity implements AdapterView.On
 
         extras = getIntent().getExtras();
 
-        this.getSupportActionBar().setTitle(extras == null ? R.string.add_trip_title : R.string.edit_trip);
+        Objects.requireNonNull(this.getSupportActionBar()).setTitle(extras == null ? R.string.add_trip_title : R.string.edit_trip);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_new_trip);
 
         tripTypes = Arrays.asList(getString(R.string.city_break), getString(R.string.sea_side), getString(R.string.mountains));
 
-        tripDataBase = Room.databaseBuilder(this, TripDataBase.class, GlobalData.TRIPS_DB_NAME).allowMainThreadQueries().build();
+        TripDataBase tripDataBase = Room.databaseBuilder(this, TripDataBase.class, GlobalData.TRIPS_DB_NAME).allowMainThreadQueries().build();
         tripDao = tripDataBase.getTripDao();
 
         initializeComponents();
 
-        spinnerAdapter = new ArrayAdapter<String>(this, R.layout.dropdown_item, tripTypes);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, R.layout.dropdown_item, tripTypes);
         tripType.setAdapter(spinnerAdapter);
         tripType.setOnItemSelectedListener(this);
 
@@ -155,19 +150,16 @@ public class NewTripActivity extends AppCompatActivity implements AdapterView.On
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ROOT);
 
-        tripDatePicker = new DatePickerDialog(this, R.style.my_dialog_theme, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                Calendar pickedDate = Calendar.getInstance();
-                pickedDate.set(year, month, dayOfMonth);
+        tripDatePicker = new DatePickerDialog(this, R.style.my_dialog_theme, (view, year, month, dayOfMonth) -> {
+            Calendar pickedDate = Calendar.getInstance();
+            pickedDate.set(year, month, dayOfMonth);
 
-                final String formattedDate = sdf.format(pickedDate.getTime());
+            final String formattedDate = sdf.format(pickedDate.getTime());
 
-                if (field.equals("startDate")) {
-                    tripStartDate.setText(formattedDate);
-                } else if (field.equals("endDate")) {
-                    tripEndDate.setText(formattedDate);
-                }
+            if (field.equals("startDate")) {
+                tripStartDate.setText(formattedDate);
+            } else if (field.equals("endDate")) {
+                tripEndDate.setText(formattedDate);
             }
         }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
 
@@ -181,7 +173,7 @@ public class NewTripActivity extends AppCompatActivity implements AdapterView.On
             if (!tripEndDate.getText().toString().isEmpty()) {
                 try {
                     String tripEndDateValue = tripEndDate.getText().toString();
-                    tripDatePicker.getDatePicker().setMaxDate(sdf.parse(tripEndDateValue).getTime());
+                    tripDatePicker.getDatePicker().setMaxDate(Objects.requireNonNull(sdf.parse(tripEndDateValue)).getTime());
                 } catch (ParseException e) {
                     Toast.makeText(this, getString(R.string.generic_exception_text), Toast.LENGTH_LONG).show();
                 }
@@ -190,7 +182,7 @@ public class NewTripActivity extends AppCompatActivity implements AdapterView.On
             if (!tripStartDate.getText().toString().isEmpty()) {
                 try {
                     String tripStartDateValue = tripStartDate.getText().toString();
-                    tripDatePicker.getDatePicker().setMinDate(sdf.parse(tripStartDateValue).getTime());
+                    tripDatePicker.getDatePicker().setMinDate(Objects.requireNonNull(sdf.parse(tripStartDateValue)).getTime());
                 } catch (ParseException e) {
                     Toast.makeText(this, getString(R.string.generic_exception_text), Toast.LENGTH_LONG).show();
                 }
@@ -200,10 +192,9 @@ public class NewTripActivity extends AppCompatActivity implements AdapterView.On
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            NavUtils.navigateUpFromSameTask(this);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

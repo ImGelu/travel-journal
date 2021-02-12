@@ -16,10 +16,4 @@ public interface UserDao {
 
     @Insert
     long insert(User user);
-
-    @Update
-    void update(User user);
-
-    @Delete
-    void delete(User user);
 }

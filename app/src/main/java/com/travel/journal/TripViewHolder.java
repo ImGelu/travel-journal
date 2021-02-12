@@ -18,11 +18,9 @@ import com.travel.journal.room.TripDataBase;
 public class TripViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
     private final TextView textViewName, textViewDestination;
-    private final MaterialCardView materialCardView;
-    private ImageButton buttonFavorite;
+    private final ImageButton buttonFavorite;
 
-    private TripDataBase tripDataBase;
-    private TripDao tripDao;
+    private final TripDao tripDao;
 
     private long tripId;
     private boolean isFavorite;
@@ -30,12 +28,12 @@ public class TripViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     public TripViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        tripDataBase = Room.databaseBuilder(itemView.getContext(), TripDataBase.class, GlobalData.TRIPS_DB_NAME).allowMainThreadQueries().build(); //! Not sure if starting a Database Builder is ok...
+        TripDataBase tripDataBase = Room.databaseBuilder(itemView.getContext(), TripDataBase.class, GlobalData.TRIPS_DB_NAME).allowMainThreadQueries().build(); //! Not sure if starting a Database Builder is ok...
         tripDao = tripDataBase.getTripDao();
 
         textViewName = itemView.findViewById(R.id.trip_name);
         textViewDestination = itemView.findViewById(R.id.trip_destination);
-        materialCardView = itemView.findViewById(R.id.card);
+        MaterialCardView materialCardView = itemView.findViewById(R.id.card);
         buttonFavorite = itemView.findViewById(R.id.button_favorite);
 
         materialCardView.setOnClickListener(this);

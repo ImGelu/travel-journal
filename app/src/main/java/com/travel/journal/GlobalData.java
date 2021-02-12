@@ -24,7 +24,7 @@ public abstract class GlobalData {
         SharedPreferences.Editor editor = preferences.edit();
         Gson gson = new Gson();
 
-        if(loggedInUser!= null) {
+        if (loggedInUser != null) {
             String userJson = gson.toJson(loggedInUser);
             editor.putString(GlobalData.LOGGED_IN_USER, userJson);
         } else {
@@ -33,7 +33,7 @@ public abstract class GlobalData {
 
         editor.apply();
 
-        if(loggedInUser!= null){
+        if (loggedInUser != null) {
             GlobalData.loggedInUser = gson.fromJson(preferences.getString(GlobalData.LOGGED_IN_USER, ""), User.class);
         } else {
             GlobalData.loggedInUser = null;

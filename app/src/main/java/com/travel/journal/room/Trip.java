@@ -54,10 +54,6 @@ public class Trip implements Serializable {
         return userId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
     public String getName() {
         return name;
     }
@@ -70,52 +66,24 @@ public class Trip implements Serializable {
         return destination;
     }
 
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
     public int getType() {
         return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
     }
 
     public double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public String getStartDate() {
         return startDate;
-    }
-
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
     }
 
     public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
-
     public double getRating() {
         return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
     }
 
     public boolean isFavorite() {
