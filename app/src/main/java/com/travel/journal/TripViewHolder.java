@@ -79,7 +79,9 @@ public class TripViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
     @Override
     public void onClick(View v) {
-        Snackbar.make(v, String.valueOf(getAdapterPosition()), BaseTransientBottomBar.LENGTH_SHORT).show();
+        Intent intent = new Intent(v.getContext(), ViewTripActivity.class);
+        intent.putExtra(GlobalData.VIEW_TRIP_ID, this.getTripId());
+        v.getContext().startActivity(intent);
     }
 
     @Override

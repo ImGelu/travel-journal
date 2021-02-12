@@ -22,9 +22,9 @@
                 android:id="@+id/trip_picture"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/card_image_height"
+                android:contentDescription="@string/travel_background"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/travel_bg"
-                android:contentDescription="@string/travel_background" />
+                app:srcCompat="@drawable/travel_bg" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -55,10 +55,10 @@
                     android:layout_alignParentEnd="true"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
+                    android:contentDescription="@string/favorite_button"
                     android:focusable="true"
                     android:src="@drawable/ic_baseline_star_outline_24"
-                    android:tint="@color/yellow_500"
-                    android:contentDescription="@string/favorite_button" />
+                    android:tint="@color/yellow_500" />
             </RelativeLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

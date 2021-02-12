@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
@@ -91,25 +90,25 @@ public class HomeActivity extends AppCompatActivity {
 
     public void openEmailLink(View view) {
         intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("mailto:imgelu@gmail.com"));
+        intent.setData(Uri.parse(getString(R.string.contact_email)));
         startActivity(intent);
     }
 
     public void openTwitterLink(View view) {
         intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("https://www.twitter.com/ImGelu"));
+        intent.setData(Uri.parse(getString(R.string.contact_twitter)));
         startActivity(intent);
     }
 
     public void openLinkedInLink(View view) {
         intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("https://www.linkedin.com/in/imgelu"));
+        intent.setData(Uri.parse(getString(R.string.contact_linkedin)));
         startActivity(intent);
     }
 
     public void openGithubLink(View view) {
         intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("https://www.github.com/ImGelu"));
+        intent.setData(Uri.parse(getString(R.string.contact_github)));
         startActivity(intent);
     }
 }

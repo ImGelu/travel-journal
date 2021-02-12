@@ -10,6 +10,7 @@ import com.travel.journal.room.User;
 public abstract class GlobalData {
     public final static String LOGGED_IN_USER = "LOGGED_IN_USER";
     public final static String EDIT_TRIP_ID = "EDIT_TRIP_ID";
+    public final static String VIEW_TRIP_ID = "VIEW_TRIP_ID";
     public final static String USERS_DB_NAME = "users.db";
     public final static String TRIPS_DB_NAME = "trips.db";
 

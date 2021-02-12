@@ -74,4 +74,8 @@
     <string name="github_logo">Github Logo</string>
     <string name="travel_background">Travel Background</string>
     <string name="favorite_button">Favorite Button</string>
+    <string name="contact_email">mailto:imgelu@gmail.com</string>
+    <string name="contact_twitter">https://www.twitter.com/ImGelu</string>
+    <string name="contact_linkedin">https://www.linkedin.com/in/imgelu</string>
+    <string name="contact_github">https://www.github.com/ImGelu</string>
 </resources>
