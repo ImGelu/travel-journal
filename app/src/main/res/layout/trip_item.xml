@@ -48,14 +48,15 @@
                     android:textColor="?android:attr/textColorSecondary" />
 
                 <ImageButton
+                    android:id="@+id/button_favorite"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/favorite_icon_height"
                     android:layout_alignParentEnd="true"
-                    android:background="@color/white"
-                    android:src="@drawable/ic_baseline_star_outline_24"
-                    android:tint="@color/gray_700"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
-                    android:focusable="true"/>
+                    android:focusable="true"
+                    android:src="@drawable/ic_baseline_star_outline_24"
+                    android:tint="@color/yellow_500" />
             </RelativeLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

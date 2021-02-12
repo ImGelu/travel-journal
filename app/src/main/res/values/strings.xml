@@ -48,4 +48,7 @@
     <string name="email_taken">That email address is already taken!</string>
     <string name="error_form_generic">Make sure that you\'ve completed the form without errors!</string>
     <string name="logout">Logout</string>
+    <string name="edit_trip">Edit a Trip</string>
+    <string name="favorites_added">Added to favorites!</string>
+    <string name="favorites_removed">Removed from favorites!</string>
 </resources>

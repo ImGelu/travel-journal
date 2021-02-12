@@ -29,6 +29,12 @@ public class TripAdapter extends RecyclerView.Adapter<TripViewHolder> {
     public void onBindViewHolder(@NonNull TripViewHolder holder, int position) {
         Trip currentTrip = trips.get(position);
         holder.setTripId(currentTrip.getId());
+
+        if(currentTrip.isFavorite()) {
+            holder.getButtonFavorite().setImageResource(R.drawable.ic_baseline_star_24);
+        }
+
+        holder.setFavorite(currentTrip.isFavorite());
         holder.getTextViewName().setText(currentTrip.getName());
         holder.getTextViewDestination().setText(currentTrip.getDestination());
     }

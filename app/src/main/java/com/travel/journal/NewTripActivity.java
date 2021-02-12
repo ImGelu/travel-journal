@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RatingBar;
@@ -49,10 +50,17 @@ public class NewTripActivity extends AppCompatActivity implements AdapterView.On
     private TripDataBase tripDataBase;
     private TripDao tripDao;
 
+    private Trip editableTrip;
+
+    private Bundle extras;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getSupportActionBar().setTitle(R.string.add_trip_title);
+
+        extras = getIntent().getExtras();
+
+        this.getSupportActionBar().setTitle(extras == null ? R.string.add_trip_title : R.string.edit_trip);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_new_trip);
 
@@ -67,6 +75,18 @@ public class NewTripActivity extends AppCompatActivity implements AdapterView.On
         tripType.setAdapter(spinnerAdapter);
         tripType.setOnItemSelectedListener(this);
 
+        if (extras != null) {
+            long editableTripId = extras.getLong(GlobalData.EDIT_TRIP_ID);
+            editableTrip = tripDao.getTrip(editableTripId);
+
+            tripName.setText(editableTrip.getName());
+            tripDestination.setText(editableTrip.getDestination());
+            tripType.setText(tripTypes.get(editableTrip.getType()), false);
+            tripStartDate.setText(editableTrip.getStartDate());
+            tripEndDate.setText(editableTrip.getEndDate());
+            tripPrice.setValue((float) editableTrip.getPrice());
+            tripRating.setRating((float) editableTrip.getRating());
+        }
     }
 
     private void initializeComponents() {
@@ -212,8 +232,13 @@ public class NewTripActivity extends AppCompatActivity implements AdapterView.On
             double newTripRating = tripRating.getRating();
 
             Trip newTrip = new Trip(newTripUserId, newTripName, newTripDestination, newTripType, newTripPrice, newTripStartDate, newTripEndDate, newTripRating);
-            tripDao.insert(newTrip);
 
+            if (extras != null) {
+                newTrip.setId(editableTrip.getId());
+                tripDao.update(newTrip);
+            } else {
+                tripDao.insert(newTrip);
+            }
             Intent intent = new Intent(view.getContext(), HomeActivity.class);
             startActivity(intent);
             finish();

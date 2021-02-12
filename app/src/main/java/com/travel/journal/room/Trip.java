@@ -1,13 +1,8 @@
 package com.travel.journal.room;
 
-import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
-
-import androidx.room.Entity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -25,9 +20,16 @@ public class Trip implements Serializable {
     private String destination;
     private int type; // 0 - City Break, 1 - Sea Side, 2 - Mountains
     private double price;
+
+    @ColumnInfo(name = "start_date")
     private String startDate;
+
+    @ColumnInfo(name = "end_date")
     private String endDate;
     private double rating;
+
+    @ColumnInfo(name = "is_favorite")
+    private boolean isFavorite;
 
     public Trip(long userId, String name, String destination, int type, double price, String startDate, String endDate, double rating) {
         this.userId = userId;
@@ -110,6 +112,18 @@ public class Trip implements Serializable {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
     }
 
     @NotNull
