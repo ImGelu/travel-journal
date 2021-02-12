@@ -51,4 +51,19 @@
     <string name="edit_trip">Edit a Trip</string>
     <string name="favorites_added">Added to favorites!</string>
     <string name="favorites_removed">Removed from favorites!</string>
+    <string name="what_is_this_exactly">What is this exactly?</string>
+    <string name="app_description">This app helps you manage the trips you\'ve made throughout your entire life! You can: \n\n- Add info such as price, type or period of time for your trips\n- Rate every trip to see which one was your favorite one\n- Mark as favorite the trips you\'ve totally loved!</string>
+    <string name="app_description_footer">This app was made as a project app for Google\'s Digital Workshop about Android Fundamentals!</string>
+    <string name="contact_description">Got questions? You can send me an email, or contact me on LinkedIn or Twitter!\n\nMake sure to visit my GitHub repository for the source code of this amazing app.</string>
+    <string name="contact_me">Contact me!</string>
+    <string name="share_text">Hey! You should check this app called TripApp, it\'s awesome!</string>
+    <string name="trip_long_click_title">What do you want to do?</string>
+    <string name="trip_long_click_edit">Edit Trip</string>
+    <string name="trip_long_click_delete">Delete Trip</string>
+    <string name="trip_long_click_cancel">Cancel</string>
+    <string name="delete_this_trip">Delete this trip</string>
+    <string name="trip_delete_description">The trip will be permanently deleted</string>
+    <string name="trip_delete_title">Are you sure you want to delete this trip?</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes_delete">Yes, delete!</string>
 </resources>

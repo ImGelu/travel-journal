@@ -1,6 +1,7 @@
 package com.travel.journal;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 import androidx.room.Room;
@@ -22,10 +23,13 @@ import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.google.android.material.slider.Slider;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.travel.journal.room.Trip;
 import com.travel.journal.room.TripDao;
 import com.travel.journal.room.TripDataBase;
+import com.travel.journal.ui.home.HomeFragment;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -41,6 +45,7 @@ public class NewTripActivity extends AppCompatActivity implements AdapterView.On
     private AutoCompleteTextView tripType;
     private Slider tripPrice;
     private RatingBar tripRating;
+    private Button deleteButton;
 
     private DatePickerDialog tripDatePicker;
 
@@ -86,6 +91,8 @@ public class NewTripActivity extends AppCompatActivity implements AdapterView.On
             tripEndDate.setText(editableTrip.getEndDate());
             tripPrice.setValue((float) editableTrip.getPrice());
             tripRating.setRating((float) editableTrip.getRating());
+
+            deleteButton.setVisibility(View.VISIBLE);
         }
     }
 
@@ -97,6 +104,8 @@ public class NewTripActivity extends AppCompatActivity implements AdapterView.On
         tripEndDate = findViewById(R.id.text_field_end_date_value);
         tripPrice = findViewById(R.id.slider_price);
         tripRating = findViewById(R.id.rating_bar);
+
+        deleteButton = findViewById(R.id.button_delete_trip);
 
         tripNameLayout = findViewById(R.id.text_field_trip_name);
         tripDestinationLayout = findViewById(R.id.text_field_destination);
@@ -280,5 +289,25 @@ public class NewTripActivity extends AppCompatActivity implements AdapterView.On
         }
 
         return existingErrors;
+    }
+
+    public void deleteTrip(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext(), R.style.AlertDialogTheme);
+
+        builder.setTitle(R.string.trip_delete_title).setMessage(R.string.trip_delete_description);
+
+        builder.setPositiveButton(R.string.yes_delete, (di, i) -> {
+            tripDao.delete(editableTrip.getId());
+            Intent intent = new Intent(view.getContext(), HomeActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
+        builder.setNegativeButton(R.string.cancel, (di, i) -> {
+
+        });
+
+
+        builder.create().show();
     }
 }

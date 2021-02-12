@@ -17,6 +17,7 @@ import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.travel.journal.GlobalData;
+import com.travel.journal.HomeActivity;
 import com.travel.journal.R;
 import com.travel.journal.room.Trip;
 import com.travel.journal.TripAdapter;
@@ -37,6 +38,8 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+
+        HomeActivity.fab.show();
 
         return root;
     }

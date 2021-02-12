@@ -31,9 +31,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/text_field_trip_name"
+        android:layout_marginTop="@dimen/small_margin"
         android:hint="@string/destination"
-        app:startIconDrawable="@drawable/ic_outline_location_on_24"
-        android:layout_marginTop="@dimen/small_margin">
+        app:startIconDrawable="@drawable/ic_outline_location_on_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/text_field_destination_value"
@@ -51,9 +51,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/text_field_destination"
+        android:layout_marginTop="@dimen/small_margin"
         android:hint="@string/trip_type"
-        app:startIconDrawable="@drawable/ic_outline_category_24"
-        android:layout_marginTop="@dimen/small_margin">
+        app:startIconDrawable="@drawable/ic_outline_category_24">
 
         <AutoCompleteTextView
             android:id="@+id/text_field_trip_type_value"
@@ -159,14 +159,39 @@
         android:max="5"
         android:numStars="5"
         android:progressTint="@color/yellow_500"
-        android:rating="3" />
+        android:rating="3"
+        android:secondaryProgressTint="@color/yellow_500" />
 
-    <Button
-        android:id="@+id/button_save_trip"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:onClick="saveTrip"
-        android:text="@string/save_trip" />
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/button_save_trip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:drawableLeft="@drawable/ic_outline_save_24"
+            android:onClick="saveTrip"
+            android:text="@string/save_trip" />
+
+        <Button
+            android:id="@+id/button_delete_trip"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="start"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:layout_weight="1"
+            android:backgroundTint="@color/red"
+            android:drawableLeft="@drawable/ic_outline_delete_24"
+            android:onClick="deleteTrip"
+            android:text="@string/delete_this_trip"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
 
 </RelativeLayout>

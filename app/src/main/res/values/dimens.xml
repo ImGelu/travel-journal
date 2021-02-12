@@ -17,4 +17,7 @@
     <dimen name="medium_margin">16dp</dimen>
     <dimen name="welcome_text_size">24sp</dimen>
     <dimen name="avatar_size">88dp</dimen>
+    <dimen name="hr_size">1dp</dimen>
+    <dimen name="contact_icon_size">24dp</dimen>
+    <dimen name="delete_button_margin">32dp</dimen>
 </resources>

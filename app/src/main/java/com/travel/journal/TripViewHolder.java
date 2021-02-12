@@ -1,7 +1,6 @@
 package com.travel.journal;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -64,10 +63,6 @@ public class TripViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         this.tripId = tripId;
     }
 
-    public boolean isFavorite() {
-        return isFavorite;
-    }
-
     public void setFavorite(boolean favorite) {
         isFavorite = favorite;
     }
@@ -84,13 +79,9 @@ public class TripViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         return buttonFavorite;
     }
 
-    public void setButtonFavorite(ImageButton buttonFavorite) {
-        this.buttonFavorite = buttonFavorite;
-    }
-
     @Override
     public void onClick(View v) {
-        Snackbar.make(v, String.valueOf(tripId), BaseTransientBottomBar.LENGTH_SHORT).show();
+        Snackbar.make(v, String.valueOf(getAdapterPosition()), BaseTransientBottomBar.LENGTH_SHORT).show();
     }
 
     @Override
@@ -98,6 +89,7 @@ public class TripViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         Intent intent = new Intent(v.getContext(), NewTripActivity.class);
         intent.putExtra(GlobalData.EDIT_TRIP_ID, this.getTripId());
         v.getContext().startActivity(intent);
+
         return true;
     }
 }

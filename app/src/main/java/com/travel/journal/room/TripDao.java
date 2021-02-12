@@ -29,6 +29,6 @@ public interface TripDao {
     @Query("UPDATE Trip SET is_favorite = 0 WHERE id = :tripId")
     void removeFavorite(long tripId);
 
-    @Delete
-    void delete(Trip trip);
+    @Query("DELETE FROM Trip WHERE id = :tripId")
+    void delete(long tripId);
 }
