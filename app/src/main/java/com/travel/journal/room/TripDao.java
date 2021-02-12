@@ -13,15 +13,15 @@ public interface TripDao {
     @Query("SELECT * FROM Trip")
     List<Trip> getTrips();
 
-    @Query("SELECT * FROM Trip WHERE user_id = :user_id")
-    List<Trip> getUserTrips(int user_id);
+    @Query("SELECT * FROM Trip WHERE user_id = :userId")
+    List<Trip> getUserTrips(long userId);
 
     @Insert
-    void insert(User user);
+    long insert(Trip trip);
 
     @Update
-    void update(User user);
+    void update(Trip trip);
 
     @Delete
-    void delete(User user);
+    void delete(Trip trip);
 }

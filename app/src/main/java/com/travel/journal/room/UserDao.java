@@ -15,7 +15,7 @@ public interface UserDao {
     User getUserByEmail(String mail);
 
     @Insert
-    void insert(User user);
+    long insert(User user);
 
     @Update
     void update(User user);

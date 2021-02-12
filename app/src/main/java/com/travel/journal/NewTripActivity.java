@@ -3,8 +3,10 @@ package com.travel.journal;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
+import androidx.room.Room;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,8 +21,10 @@ import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.google.android.material.slider.Slider;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
+import com.travel.journal.room.Trip;
+import com.travel.journal.room.TripDao;
+import com.travel.journal.room.TripDataBase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -42,6 +46,9 @@ public class NewTripActivity extends AppCompatActivity implements AdapterView.On
     private List<String> tripTypes;
     private ArrayAdapter<String> spinnerAdapter;
 
+    private TripDataBase tripDataBase;
+    private TripDao tripDao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +57,9 @@ public class NewTripActivity extends AppCompatActivity implements AdapterView.On
         setContentView(R.layout.activity_new_trip);
 
         tripTypes = Arrays.asList(getString(R.string.city_break), getString(R.string.sea_side), getString(R.string.mountains));
+
+        tripDataBase = Room.databaseBuilder(this, TripDataBase.class, GlobalData.TRIPS_DB_NAME).allowMainThreadQueries().build();
+        tripDao = tripDataBase.getTripDao();
 
         initializeComponents();
 
@@ -82,7 +92,7 @@ public class NewTripActivity extends AppCompatActivity implements AdapterView.On
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!tripName.getText().toString().isEmpty()) tripNameLayout.setError(null);
+                if (!tripName.getText().toString().isEmpty()) tripNameLayout.setError(null);
                 else tripNameLayout.setError(getString(R.string.error_required));
             }
 
@@ -100,7 +110,8 @@ public class NewTripActivity extends AppCompatActivity implements AdapterView.On
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!tripDestination.getText().toString().isEmpty()) tripDestinationLayout.setError(null);
+                if (!tripDestination.getText().toString().isEmpty())
+                    tripDestinationLayout.setError(null);
                 else tripDestinationLayout.setError(getString(R.string.error_required));
             }
 
@@ -190,8 +201,22 @@ public class NewTripActivity extends AppCompatActivity implements AdapterView.On
     }
 
     public void saveTrip(View view) {
-        if(!runValidations()){
-            Snackbar.make(view, "Saved!", Snackbar.LENGTH_SHORT).show();
+        if (!runValidations()) {
+            long newTripUserId = GlobalData.getLoggedInUser().getId();
+            String newTripName = tripName.getText().toString().trim();
+            String newTripDestination = tripDestination.getText().toString().trim();
+            int newTripType = tripTypes.indexOf(tripType.getText().toString().trim());
+            double newTripPrice = tripPrice.getValue();
+            String newTripStartDate = tripStartDate.getText().toString().trim();
+            String newTripEndDate = tripEndDate.getText().toString().trim();
+            double newTripRating = tripRating.getRating();
+
+            Trip newTrip = new Trip(newTripUserId, newTripName, newTripDestination, newTripType, newTripPrice, newTripStartDate, newTripEndDate, newTripRating);
+            tripDao.insert(newTrip);
+
+            Intent intent = new Intent(view.getContext(), HomeActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 

@@ -13,13 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import com.travel.journal.GlobalData;
 import com.travel.journal.R;
 import com.travel.journal.room.Trip;
 import com.travel.journal.TripAdapter;
 import com.travel.journal.room.TripDao;
 import com.travel.journal.room.TripDataBase;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
@@ -30,8 +30,6 @@ public class HomeFragment extends Fragment {
 
     private TripDataBase tripDataBase;
     private TripDao tripDao;
-
-    public final String DB_NAME = "trips.db";
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
@@ -44,15 +42,10 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        tripDataBase = Room.databaseBuilder(view.getContext(), TripDataBase.class, DB_NAME).allowMainThreadQueries().build();
+        tripDataBase = Room.databaseBuilder(view.getContext(), TripDataBase.class, GlobalData.TRIPS_DB_NAME).allowMainThreadQueries().build();
         tripDao = tripDataBase.getTripDao();
 
-        trips = tripDao.getTrips();
-        /*Trip trip = null;
-        for (int i = 0; i < 20; i++) {
-            trip = new Trip(1, "Trip Name " + i, "Destination " + i, (int) Math.random()*4, 3, "DateStart" + i, "DateEnd" + i, 5);
-            trips.add(trip);
-        }*/
+        trips = tripDao.getUserTrips(GlobalData.getLoggedInUser().getId());
 
         recyclerViewTrips = getView().findViewById(R.id.recycler_view_trips);
         recyclerViewTrips.setLayoutManager(new LinearLayoutManager(getView().getContext()));

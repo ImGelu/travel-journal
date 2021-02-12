@@ -43,4 +43,9 @@
     <string name="password_verification">Password verification</string>
     <string name="error_wrong_credentials">Wrong email or password! Try again!</string>
     <string name="error_email_pattern">Please enter a valid email address!</string>
+    <string name="error_password_verification">The password fields must be the same.</string>
+    <string name="error_unfilled">Please fill all the fields!</string>
+    <string name="email_taken">That email address is already taken!</string>
+    <string name="error_form_generic">Make sure that you\'ve completed the form without errors!</string>
+    <string name="logout">Logout</string>
 </resources>

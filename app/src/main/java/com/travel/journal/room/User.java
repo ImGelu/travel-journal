@@ -6,12 +6,13 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import org.jetbrains.annotations.NotNull;
+
 @Entity
 public class User implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
-    @NonNull
-    private int id;
+    private long id;
     private String name;
     private String email;
     private String password;
@@ -22,11 +23,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -54,6 +55,7 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    @NotNull
     @Override
     public String toString() {
         return "User{" +

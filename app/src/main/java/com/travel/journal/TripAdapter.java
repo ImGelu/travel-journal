@@ -28,6 +28,7 @@ public class TripAdapter extends RecyclerView.Adapter<TripViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull TripViewHolder holder, int position) {
         Trip currentTrip = trips.get(position);
+        holder.setTripId(currentTrip.getId());
         holder.getTextViewName().setText(currentTrip.getName());
         holder.getTextViewDestination().setText(currentTrip.getDestination());
     }

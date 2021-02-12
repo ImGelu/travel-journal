@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -15,15 +13,11 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.gson.Gson;
 import com.travel.journal.room.User;
 import com.travel.journal.room.UserDao;
 import com.travel.journal.room.UserDataBase;
 
 public class LoginActivity extends AppCompatActivity {
-
-    public final String LOGGED_IN_USER = "LOGGED_IN_USER";
-    public final String DB_NAME = "users.db";
 
     private EditText userEmail, userPassword;
     private TextInputLayout userEmailLayout, userPasswordLayout;
@@ -36,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        userDataBase = Room.databaseBuilder(this, UserDataBase.class, DB_NAME).allowMainThreadQueries().build();
+        userDataBase = Room.databaseBuilder(this, UserDataBase.class, GlobalData.USERS_DB_NAME).allowMainThreadQueries().build();
         userDao = userDataBase.getUserDao();
 
         userEmail = findViewById(R.id.text_field_email_value);
@@ -96,13 +90,7 @@ public class LoginActivity extends AppCompatActivity {
             User user = userDao.getUser(email, password);
 
             if (user != null) {
-                Gson gson = new Gson();
-                String userJson = gson.toJson(user);
-
-                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(view.getContext());
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putString(LOGGED_IN_USER, userJson);
-                editor.apply();
+                GlobalData.setLoggedInUser(user, view.getContext());
 
                 Intent intent = new Intent(view.getContext(), HomeActivity.class);
                 startActivity(intent);

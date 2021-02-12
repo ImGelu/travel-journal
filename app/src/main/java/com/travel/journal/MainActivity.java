@@ -12,9 +12,6 @@ import com.travel.journal.room.User;
 
 public class MainActivity extends AppCompatActivity {
 
-    public User loggedInUser;
-    public final String LOGGED_IN_USER = "LOGGED_IN_USER";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.SplashTheme);
@@ -23,15 +20,15 @@ public class MainActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        loggedInUser = gson.fromJson(preferences.getString(LOGGED_IN_USER, ""), User.class);
+        GlobalData.setLoggedInUser(gson.fromJson(preferences.getString(GlobalData.LOGGED_IN_USER, ""), User.class), this);
 
-        if(loggedInUser != null) {
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
+        Intent intent;
+        if (GlobalData.getLoggedInUser() != null) {
+            intent = new Intent(this, HomeActivity.class);
         } else {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
+            intent = new Intent(this, LoginActivity.class);
         }
+        startActivity(intent);
 
         finish();
     }
