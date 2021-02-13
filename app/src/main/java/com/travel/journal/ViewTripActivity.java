@@ -72,24 +72,28 @@ public class ViewTripActivity extends AppCompatActivity {
         call.enqueue(new Callback<Weather>() {
             @Override
             public void onResponse(Call<Weather> call, Response<Weather> response) {
-                Weather main = response.body();
+                if(response.code() == 200) {
+                    Weather main = response.body();
 
-                if (main.getCurrentTemperature() > 0) {
-                    weatherIcon.setImageResource(R.drawable.ic_outline_wb_sunny_24);
-                    weatherIcon.setColorFilter(ActivityCompat.getColor(ViewTripActivity.this, R.color.yellow_500));
+                    if (main.getCurrentTemperature() > 0) {
+                        weatherIcon.setImageResource(R.drawable.ic_outline_wb_sunny_24);
+                        weatherIcon.setColorFilter(ActivityCompat.getColor(ViewTripActivity.this, R.color.yellow_500));
+                    } else {
+                        weatherIcon.setImageResource(R.drawable.ic_outline_ice_skating_24);
+                        weatherIcon.setColorFilter(ActivityCompat.getColor(ViewTripActivity.this, R.color.blue_500));
+                    }
+
+                    weatherNow.setText(String.format("%s%s", main.getCurrentTemperature(), getString(R.string.degree_symbol)));
+                    weatherMin.setText(String.format("%s%s", main.getMinTemperature(), getString(R.string.degree_symbol)));
+                    weatherMax.setText(String.format("%s%s", main.getMaxTemperature(), getString(R.string.degree_symbol)));
+                    weatherWind.setText(String.format("%s %s", main.getWind(), getString(R.string.wind_unit)));
+                    weatherCloud.setText(String.format("%s%s", main.getClouds(), getString(R.string.cloud_unit)));
+                    weatherHumidity.setText(String.format("%s%s", main.getHumidity(), getString(R.string.humidity_unit)));
+                    weatherTitle.setText(R.string.the_weather_right_now);
+                    weatherLayout.setVisibility(View.VISIBLE);
                 } else {
-                    weatherIcon.setImageResource(R.drawable.ic_outline_ice_skating_24);
-                    weatherIcon.setColorFilter(ActivityCompat.getColor(ViewTripActivity.this, R.color.blue_500));
+                    weatherTitle.setText(R.string.weather_error);
                 }
-
-                weatherNow.setText(String.format("%s%s", main.getCurrentTemperature(), getString(R.string.degree_symbol)));
-                weatherMin.setText(String.format("%s%s", main.getMinTemperature(), getString(R.string.degree_symbol)));
-                weatherMax.setText(String.format("%s%s", main.getMaxTemperature(), getString(R.string.degree_symbol)));
-                weatherWind.setText(String.format("%s %s", main.getWind(), getString(R.string.wind_unit)));
-                weatherCloud.setText(String.format("%s%s", main.getClouds(), getString(R.string.cloud_unit)));
-                weatherHumidity.setText(String.format("%s%s", main.getHumidity(), getString(R.string.humidity_unit)));
-                weatherTitle.setText(R.string.the_weather_right_now);
-                weatherLayout.setVisibility(View.VISIBLE);
             }
 
             @Override
