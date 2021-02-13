@@ -78,4 +78,11 @@
     <string name="contact_twitter">https://www.twitter.com/ImGelu</string>
     <string name="contact_linkedin">https://www.linkedin.com/in/imgelu</string>
     <string name="contact_github">https://www.github.com/ImGelu</string>
+    <string name="the_weather_right_now">The weather right now!</string>
+    <string name="degree_symbol">°</string>
+    <string name="wind_unit">m/s</string>
+    <string name="cloud_unit">%</string>
+    <string name="humidity_unit">%</string>
+    <string name="loading_weather">Loading Weather...</string>
+    <string name="weather_error">We couldn\'t get the weather for this location. Please try again later!</string>
 </resources>

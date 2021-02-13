@@ -3,6 +3,7 @@ package com.travel.journal;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ public class TripViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
     private final TextView textViewName, textViewDestination;
     private final ImageButton buttonFavorite;
+    private final ImageView tripPicture;
 
     private final TripDao tripDao;
 
@@ -35,6 +37,7 @@ public class TripViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         textViewDestination = itemView.findViewById(R.id.trip_destination);
         MaterialCardView materialCardView = itemView.findViewById(R.id.card);
         buttonFavorite = itemView.findViewById(R.id.button_favorite);
+        tripPicture = itemView.findViewById(R.id.trip_picture);
 
         materialCardView.setOnClickListener(this);
         materialCardView.setOnLongClickListener(this);
@@ -75,6 +78,10 @@ public class TripViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
     public ImageButton getButtonFavorite() {
         return buttonFavorite;
+    }
+
+    public ImageView getTripPicture() {
+        return tripPicture;
     }
 
     @Override

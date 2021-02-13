@@ -34,6 +34,13 @@ public class TripAdapter extends RecyclerView.Adapter<TripViewHolder> {
             holder.getButtonFavorite().setImageResource(R.drawable.ic_baseline_star_24);
         }
 
+        switch(currentTrip.getType()){
+            case 0: holder.getTripPicture().setImageResource(R.drawable.travel_city); break;
+            case 1: holder.getTripPicture().setImageResource(R.drawable.travel_sea); break;
+            case 2: holder.getTripPicture().setImageResource(R.drawable.travel_mountains); break;
+            default: holder.getTripPicture().setImageResource(R.drawable.travel_bg);
+        }
+
         holder.setFavorite(currentTrip.isFavorite());
         holder.getTextViewName().setText(currentTrip.getName());
         holder.getTextViewDestination().setText(currentTrip.getDestination());
