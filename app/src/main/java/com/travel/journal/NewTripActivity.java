@@ -4,9 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
+import androidx.core.content.ContextCompat;
 import androidx.room.Room;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -294,11 +296,14 @@ public class NewTripActivity extends AppCompatActivity implements AdapterView.On
             finish();
         });
 
-        builder.setNegativeButton(R.string.cancel, (di, i) -> {
+        builder.setNeutralButton(R.string.cancel, (di, i) -> {
 
         });
 
+        AlertDialog dialog = builder.create();
+        dialog.show();
 
-        builder.create().show();
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.black));
+        dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setTextColor(getResources().getColor(R.color.black));
     }
 }
