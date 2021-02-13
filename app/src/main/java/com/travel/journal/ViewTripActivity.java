@@ -1,10 +1,14 @@
 package com.travel.journal;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.room.Room;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -31,9 +35,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.Manifest.permission.INTERNET;
+
 public class ViewTripActivity extends AppCompatActivity {
 
     private static final String API_TOKEN = "e1980f218fc410cc362331590255d98c";
+    private static final int INTERNET_PERMISSION = 1;
 
     private TripDao tripDao;
     private Trip trip;
@@ -57,6 +64,7 @@ public class ViewTripActivity extends AppCompatActivity {
         List<String> tripTypes = Arrays.asList(getString(R.string.city_break), getString(R.string.sea_side), getString(R.string.mountains));
 
         initializeComponents(tripTypes);
+        checkForInternetPermission();
 
         switch(trip.getType()){
             case 0: tripPicture.setImageResource(R.drawable.travel_city); break;
@@ -102,6 +110,24 @@ public class ViewTripActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    private void checkForInternetPermission() {
+        if (ContextCompat.checkSelfPermission(ViewTripActivity.this, INTERNET) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(ViewTripActivity.this, new String[]{INTERNET}, INTERNET_PERMISSION);
+            Toast.makeText(ViewTripActivity.this, R.string.no_permission, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == INTERNET_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(ViewTripActivity.this, new String[]{INTERNET}, INTERNET_PERMISSION);
+                Toast.makeText(ViewTripActivity.this, R.string.no_permission, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     private void initializeComponents(List<String> tripTypes) {
